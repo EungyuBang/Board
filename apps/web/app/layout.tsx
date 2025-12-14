@@ -1,3 +1,4 @@
+// 이 파일은 Next.js 앱의 최상위 HTML 구조와 전역 스타일, 전역 폰트를 정의하는 레이아웃이다.
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
