@@ -1,5 +1,6 @@
 // notFound 함수 호출.
 import { notFound } from "next/navigation";
+import Link from "next/link";
 
 export default async function BoardDetailPage({
   params,
@@ -20,6 +21,9 @@ export default async function BoardDetailPage({
     <div>
       <h1>게시글 상세 페이지</h1>
       <p>게시글 ID: {id}</p>
+      <Link href={`/board/${id}/edit`}>
+        <button>수정하기</button>
+      </Link>
     </div>
   );
 }
