@@ -64,51 +64,107 @@ export default function MainPage() {
   };
 
   return (
-    <div className="p-10">
-      <h1 className="text-3xl font-bold mb-10">메인 페이지</h1>
+    <div className="animate-fade-in">
+      {/* 헤더 영역 */}
+      <div className="glass-card p-6 mb-8">
+        <div className="flex items-center justify-between">
+          <h1
+            className="text-3xl font-bold"
+            style={{ color: "rgb(37, 147, 255)" }}
+          >
+            📋 게시판
+          </h1>
 
-      {isLoggedIn ? (
-        // === 로그인 중일 때 보여줄 화면 ===
-        <div className="flex flex-col gap-4">
-          <p className="text-xl">환영합니다! {user?.nickname}님! 🎉</p>
-          <Link href="/board/create">
-            <button>게시글 작성</button>
-          </Link>
-          <button onClick={handleLogout}>로그아웃</button>
-        </div>
-      ) : (
-        // === 로그인 안 했을 때 보여줄 화면 ===
-        <div className="flex flex-col gap-4">
-          <p className="text-xl">로그인이 필요합니다.</p>
-          <Link href="/login">
-            <button>로그인</button>
-          </Link>
-          <Link href="/signup">
-            <button>회원가입</button>
-          </Link>
-        </div>
-      )}
-
-      <div className="mb-10">
-        <h2 className="text-2xl font-bold mb-4">게시글 목록 📝</h2>
-        <div className="flex flex-col gap-4">
-          {posts.map((post: any) => (
-            <div
-              key={post.id}
-              className="border p-4 rounded shadow hover:bg-gray-50 transition-colors"
-            >
-              <Link href={`/board/${post.id}`}>
-                <h3 className="text-xl font-bold mb-2 cursor-pointer text-blue-600 hover:text-blue-800">
-                  {post.title}
-                </h3>
+          {isLoggedIn ? (
+            // === 로그인 중일 때 보여줄 화면 ===
+            <div className="flex items-center gap-4">
+              <span className="text-gray-700">
+                환영합니다,{" "}
+                <span
+                  className="font-semibold"
+                  style={{ color: "rgb(37, 147, 255)" }}
+                >
+                  {user?.nickname}
+                </span>
+                님! 🎉
+              </span>
+              <Link href="/board/create">
+                <button className="text-sm py-2 px-4">✏️ 글쓰기</button>
               </Link>
-              <p className="mb-2 text-gray-700 line-clamp-3">{post.content}</p>
-              <p className="text-sm text-gray-500">
-                작성자: {post.author?.nickname || "알 수 없음"}
-              </p>
+              <button
+                onClick={handleLogout}
+                className="text-sm py-2 px-4"
+                style={{ background: "#e5e7eb", color: "#374151" }}
+              >
+                로그아웃
+              </button>
             </div>
-          ))}
+          ) : (
+            // === 로그인 안 했을 때 보여줄 화면 ===
+            <div className="flex items-center gap-3">
+              <Link href="/login">
+                <button className="text-sm py-2 px-4">로그인</button>
+              </Link>
+              <Link href="/signup">
+                <button
+                  className="text-sm py-2 px-4"
+                  style={{ background: "#e5e7eb", color: "#374151" }}
+                >
+                  회원가입
+                </button>
+              </Link>
+            </div>
+          )}
         </div>
+      </div>
+
+      {/* 게시글 목록 */}
+      <div className="mb-10">
+        <h2 className="text-xl font-semibold text-gray-700 mb-6 flex items-center gap-2">
+          <span
+            className="w-1 h-6 rounded-full"
+            style={{ background: "rgb(37, 147, 255)" }}
+          ></span>
+          최신 게시글
+        </h2>
+
+        {posts.length === 0 ? (
+          <div className="glass-card p-12 text-center">
+            <p className="text-gray-600 text-lg">아직 게시글이 없습니다</p>
+            <p className="text-gray-400 text-sm mt-2">
+              첫 번째 글을 작성해보세요!
+            </p>
+          </div>
+        ) : (
+          <div className="grid gap-4">
+            {posts.map((post: any) => (
+              <Link href={`/board/${post.id}`} key={post.id}>
+                <div
+                  className="glass-card p-5 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
+                  style={{ borderColor: "transparent" }}
+                >
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2 group-hover:text-[rgb(37,147,255)] transition-colors">
+                    {post.title}
+                  </h3>
+                  <p className="text-gray-500 text-sm mb-3 line-clamp-2">
+                    {post.content}
+                  </p>
+                  <div className="flex items-center gap-2 text-xs text-gray-500">
+                    <span
+                      className="px-2 py-1 rounded-full"
+                      style={{
+                        background: "rgba(37, 147, 255, 0.1)",
+                        color: "rgb(37, 147, 255)",
+                      }}
+                    >
+                      {post.author?.nickname || "알 수 없음"}
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

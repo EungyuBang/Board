@@ -48,37 +48,56 @@ export default function Login() {
   };
 
   return (
-    <div className="p-10">
-      <h1 className="text-2xl font-bold mb-5">로그인</h1>
-      {/* 
-        4. form 태그와 input 태그들을 작성하세요. 
-        - username, password 입력 칸이 필요합니다.
-        - 로그인 버튼을 만드세요.
-      */}
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-sm">
-        {/* 여기에 input 2개 (username, password) 만드시면 됩니다! */}
-        <input
-          type="text"
-          name="username"
-          value={formdata.username}
-          onChange={inputChangeHandler}
-          placeholder="username"
-        />
-        <input
-          type="password"
-          name="password"
-          value={formdata.password}
-          onChange={inputChangeHandler}
-          placeholder="password"
-        />
-        <button
-          type="submit"
-          className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
-        >
-          로그인
-        </button>
-        <Link href="/signup">회원가입</Link>
-      </form>
+    <div className="min-h-[80vh] flex items-center justify-center animate-fade-in">
+      <div className="glass-card p-8 w-full max-w-md">
+        <div className="text-center mb-8">
+          <h1
+            className="text-3xl font-bold"
+            style={{ color: "rgb(37, 147, 255)" }}
+          >
+            로그인
+          </h1>
+          <p className="text-gray-500 mt-2">계정에 로그인하세요</p>
+        </div>
+
+        {/* 
+          4. form 태그와 input 태그들을 작성하세요. 
+          - username, password 입력 칸이 필요합니다.
+          - 로그인 버튼을 만드세요.
+        */}
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          {/* 여기에 input 2개 (username, password) 만드시면 됩니다! */}
+          <div>
+            <label className="block text-sm text-gray-600 mb-2">아이디</label>
+            <input
+              type="text"
+              name="username"
+              value={formdata.username}
+              onChange={inputChangeHandler}
+              placeholder="아이디를 입력하세요"
+            />
+          </div>
+          <div>
+            <label className="block text-sm text-gray-600 mb-2">비밀번호</label>
+            <input
+              type="password"
+              name="password"
+              value={formdata.password}
+              onChange={inputChangeHandler}
+              placeholder="비밀번호를 입력하세요"
+            />
+          </div>
+          <button type="submit" className="w-full mt-4">
+            로그인
+          </button>
+          <p className="text-center text-gray-500 text-sm mt-4">
+            계정이 없으신가요?{" "}
+            <Link href="/signup" style={{ color: "rgb(37, 147, 255)" }}>
+              회원가입
+            </Link>
+          </p>
+        </form>
+      </div>
     </div>
   );
 }
