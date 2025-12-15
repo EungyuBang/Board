@@ -17,23 +17,40 @@ export class PostService {
     });
   }
 
-  async findAll() {
-    return this.prisma.post.findMany({
-      orderBy: { createdAt: "desc" },
-      include: {
-        author: {
-          select: {
-            id: true,
-            nickname: true,
+  async findAll(page: number = 1, limit: number = 10) {
+    const skip = (page - 1) * limit;
+
+    const [posts, total] = await Promise.all([
+      this.prisma.post.findMany({
+        skip,
+        take: limit,
+        orderBy: { createdAt: "desc" },
+        include: {
+          author: {
+            select: {
+              id: true,
+              nickname: true,
+            },
+          },
+          _count: {
+            select: {
+              comments: true,
+            },
           },
         },
-        _count: {
-          select: {
-            comments: true,
-          },
-        },
+      }),
+      this.prisma.post.count(),
+    ]);
+
+    return {
+      data: posts,
+      meta: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
       },
-    });
+    };
   }
 
   findOne(id: number) {

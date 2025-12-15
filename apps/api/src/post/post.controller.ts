@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   Req,
+  Query,
 } from "@nestjs/common";
 import { PostService } from "./post.service";
 import { CreatePostDto } from "./dto/create-post.dto";
@@ -25,8 +26,11 @@ export class PostController {
   }
 
   @Get()
-  findAll() {
-    return this.postService.findAll();
+  findAll(
+    @Query("page") page: string = "1",
+    @Query("limit") limit: string = "10",
+  ) {
+    return this.postService.findAll(+page, +limit);
   }
 
   @Get(":id")
