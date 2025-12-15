@@ -14,7 +14,32 @@ datasource db {
   provider = "postgresql"
 }
 
-model Exam {
-  id     Int @id @default(autoincrement())
-  number Int
+
+// User 모델
+// @id: id를 식별자로 사용
+// @default(autoincrement()): id가 자동으로 증가
+// @unique: username이 고유한 값이어야 함
+model User {
+  id        Int      @id @default(autoincrement())   
+  username  String   @unique
+  password  String
+  nickname  String?
+  email     String?  @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  posts     Post[]
+}
+
+// Post 모델
+// @id: id를 식별자로 사용
+// @default(autoincrement()): id가 자동으로 증가
+// @relation(fields: [authorId], references: [id]): authorId와 User 모델의 id를 연관 관계로 설정
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  authorId  Int
+  author    User     @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
