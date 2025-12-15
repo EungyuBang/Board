@@ -25,11 +25,6 @@ export default function Login() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // 3. 백엔드 API ("http://localhost:4000/auth/login")에 POST 요청을 보내세요.
-    // - 성공하면:
-    //    1) 받은 accessToken을 localStorage에 저장하세요: localStorage.setItem("accessToken", data.accessToken)
-    //    2) 메인 페이지("/")로 이동하세요.
-    // - 실패하면: 에러 메시지(alert) 띄우기
     try {
       const response = await fetch("http://localhost:4000/auth/login", {
         method: "POST",
@@ -38,12 +33,21 @@ export default function Login() {
         },
         body: JSON.stringify(formdata),
       });
+
+      if (!response.ok) {
+        // 401 Unauthorized 등을 처리
+        const errorData = await response.json();
+        alert(errorData.message || "로그인에 실패했습니다.");
+        return;
+      }
+
       const { accessToken } = await response.json();
       localStorage.setItem("accessToken", accessToken);
-      alert("로그인 성공");
+      alert("로그인 성공! 🎉");
       router.push("/");
     } catch (error) {
-      alert("로그인 실패");
+      console.error(error);
+      alert("서버 연결에 실패했습니다.");
     }
   };
 

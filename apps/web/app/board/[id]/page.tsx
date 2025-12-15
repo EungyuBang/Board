@@ -10,9 +10,9 @@ export default function BoardDetailPage() {
   const id = params.id;
 
   // 상태 관리
-  const [boardinfo, setBoardInfo] = useState(null);
-  const [userinfo, setUserInfo] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [boardinfo, setBoardInfo] = useState<any>(null);
+  const [userinfo, setUserInfo] = useState<any>(null);
+  // const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // localStorage 접근은 useEffect 내부에서 안전하게 실행
@@ -40,24 +40,11 @@ export default function BoardDetailPage() {
         }
       } catch (error) {
         console.error("데이터 로딩 실패:", error);
-      } finally {
-        setIsLoading(false);
       }
     };
 
     fetchData();
   }, [id]);
-
-  // 로딩 중일 때
-  if (isLoading) {
-    return (
-      <div className="animate-fade-in">
-        <div className="glass-card p-8 max-w-3xl mx-auto flex justify-center items-center min-h-[400px]">
-          <div className="text-gray-500 animate-pulse">로딩 중... ⏳</div>
-        </div>
-      </div>
-    );
-  }
 
   // 데이터가 없을 때
   if (!boardinfo) {
@@ -123,12 +110,10 @@ export default function BoardDetailPage() {
         </div>
 
         <article>
-          {/* 제목 */}
           <h1 className="text-3xl font-bold text-gray-800 mb-4">
             {boardinfo.title}
           </h1>
 
-          {/* 메타 정보 (작성자, 날짜) */}
           <div className="border-b border-gray-200 mb-8 pb-4 flex justify-between items-center text-sm text-gray-500">
             <div className="flex items-center gap-3">
               <span className="font-medium text-gray-700">
@@ -139,13 +124,11 @@ export default function BoardDetailPage() {
             </div>
           </div>
 
-          {/* 본문 내용 */}
           <div className="text-gray-700 leading-relaxed mb-12 whitespace-pre-wrap min-h-[200px]">
             {boardinfo.content}
           </div>
         </article>
 
-        {/* 하단 버튼 영역 */}
         {isAuthor && (
           <div className="flex gap-3 pt-6 border-t border-gray-200 justify-end">
             <Link href={`/board/${id}/edit`}>

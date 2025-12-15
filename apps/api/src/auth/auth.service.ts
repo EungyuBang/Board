@@ -18,7 +18,7 @@ export class AuthService {
   ) {}
 
   async register(registerDto: RegisterDto) {
-    // 1. 이메일 중복 체크
+    // 1. username 중복 체크
     const existingUser = await this.prisma.user.findUnique({
       where: { username: registerDto.username },
     });
@@ -48,7 +48,7 @@ export class AuthService {
   async login(loginDto: LoginDto) {
     const { username, password } = loginDto;
 
-    // 1. username을 기준으로 유저를 찾습니다.
+    // 1. username을 기준으로 유저를 찾고.
     const user = await this.prisma.user.findUnique({
       where: { username },
     });
@@ -67,7 +67,7 @@ export class AuthService {
     // 3. 토큰 발급
     const accessToken = this.jwtService.sign({
       nickname: user.nickname,
-      sub: user.id, // 일반적으로 user id도 payload에 넣습니다
+      sub: user.id,
     });
 
     return { accessToken };
