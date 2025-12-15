@@ -36,7 +36,7 @@ export class AuthService {
         username: registerDto.username,
         password: hashedPassword,
         nickname: registerDto.nickname,
-        // email: registerDto.email, // 이메일이 선택사항이면 생략 가능
+        email: registerDto.email,
       },
     });
 

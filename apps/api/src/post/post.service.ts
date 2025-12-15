@@ -19,11 +19,17 @@ export class PostService {
 
   async findAll() {
     return this.prisma.post.findMany({
+      orderBy: { createdAt: "desc" },
       include: {
         author: {
           select: {
             id: true,
             nickname: true,
+          },
+        },
+        _count: {
+          select: {
+            comments: true,
           },
         },
       },
