@@ -18,12 +18,6 @@ import { AuthGuard } from "@nestjs/passport";
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @UseGuards(AuthGuard("jwt"))
-  @Get("me")
-  getProfile(@Req() req) {
-    return req.user;
-  }
-
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
@@ -32,6 +26,12 @@ export class UsersController {
   @Get()
   findAll() {
     return this.usersService.findAll();
+  }
+
+  @UseGuards(AuthGuard("jwt"))
+  @Get("me")
+  getProfile(@Req() req) {
+    return req.user;
   }
 
   @Get(":id")

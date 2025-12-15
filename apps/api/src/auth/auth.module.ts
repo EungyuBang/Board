@@ -9,7 +9,7 @@ import { JwtStrategy } from "./jwt.strategy";
   imports: [
     PassportModule,
     JwtModule.register({
-      secret: "secretKey", // 실무에서는 .env 파일에 숨겨야 합니다!
+      secret: "secretKey",
       signOptions: { expiresIn: "1h" }, // 토큰 유효시간 1시간
     }),
   ],

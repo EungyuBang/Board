@@ -66,7 +66,7 @@ export class AuthService {
 
     // 3. 토큰 발급
     const accessToken = this.jwtService.sign({
-      username: user.username,
+      nickname: user.nickname,
       sub: user.id, // 일반적으로 user id도 payload에 넣습니다
     });
 
