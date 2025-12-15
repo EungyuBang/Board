@@ -66,6 +66,16 @@ export default function BoardListComponent() {
                   >
                     {post.author?.nickname || "알 수 없음"}
                   </span>
+                  <span className="text-gray-300">|</span>
+                  <span>
+                    {new Date(post.createdAt).toLocaleDateString("ko-KR", {
+                      month: "numeric",
+                      day: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      hour12: false,
+                    })}
+                  </span>
                   <span className="text-gray-400">
                     💬 {post._count?.comments || 0}
                   </span>
