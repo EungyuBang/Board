@@ -94,94 +94,87 @@ export default function UserPage() {
       <div className="mb-6">
         <Link
           href="/"
-          className="text-gray-500 hover:text-[rgb(37,147,255)] transition-colors text-sm flex items-center gap-1"
+          className="text-gray-500 hover:text-accent transition-colors text-sm flex items-center gap-1 font-medium"
         >
           ← 메인으로 돌아가기
         </Link>
       </div>
 
-      <div className="glass-card p-10 mb-10">
-        <h1 className="text-3xl font-bold mb-8 flex items-center gap-3 text-gray-800">
-          <span className="w-1.5 h-8 bg-[rgb(37,147,255)] rounded-full"></span>
-          마이 페이지
-        </h1>
-
-        <div className="flex flex-col md:flex-row items-center gap-10">
-          {/* 프로필 이미지 영역 */}
-          <div className="relative">
-            <div className="w-32 h-32 rounded-full bg-linear-to-br from-[rgb(37,147,255)] to-blue-400 flex items-center justify-center text-5xl font-bold text-white shadow-xl shadow-blue-200">
-              {user.nickname?.[0] || "U"}
-            </div>
-            <div className="absolute bottom-1 right-1 w-8 h-8 bg-green-400 border-4 border-white rounded-full"></div>
+      <div className="bg-white rounded-2xl p-10 mb-10 shadow-sm border border-gray-100 flex flex-col md:flex-row items-center gap-10">
+        {/* 프로필 이미지 영역 */}
+        <div className="relative shrink-0">
+          <div className="w-32 h-32 rounded-full bg-linear-to-br from-accent to-blue-400 flex items-center justify-center text-5xl font-bold text-white shadow-xl shadow-blue-200">
+            {user.nickname?.[0] || "U"}
           </div>
+        </div>
 
-          {/* 정보 영역 */}
-          <div className="flex-1 space-y-4 w-full text-center md:text-left">
-            <div>
+        {/* 정보 영역 */}
+        <div className="flex-1 space-y-4 w-full text-center md:text-left">
+          <div>
+            <div className="flex items-center justify-center md:justify-between w-full group mb-1">
               {isEditing ? (
-                <div className="flex items-center gap-2 justify-center md:justify-start">
+                <div className="flex items-center gap-2">
                   <input
                     type="text"
                     value={editNickname}
                     onChange={(e) => setEditNickname(e.target.value)}
-                    className="text-3xl font-bold text-gray-800 mb-1 border-b-2 border-blue-500 focus:outline-none bg-transparent w-40"
+                    className="text-3xl font-bold text-gray-800 border-b-2 border-blue-500 focus:outline-none bg-transparent w-40"
                     autoFocus
                   />
                   <div className="flex gap-2">
                     <button
                       onClick={handleSaveEdit}
-                      className="text-sm bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 whitespace-nowrap font-bold transition-colors"
+                      className="text-xs bg-accent text-white px-3 py-1.5 rounded-lg hover:bg-accent-hover font-bold transition-colors"
                     >
                       저장
                     </button>
                     <button
                       onClick={handleCancelEdit}
-                      className="text-sm bg-gray-200 text-gray-600 px-4 py-2 rounded hover:bg-gray-300 whitespace-nowrap font-bold transition-colors"
+                      className="text-xs bg-gray-100 text-gray-600 px-3 py-1.5 rounded-lg hover:bg-gray-200 font-bold transition-colors"
                     >
                       취소
                     </button>
                   </div>
                 </div>
               ) : (
-                <div className="flex items-center justify-between w-full group">
-                  <h2 className="text-3xl font-bold text-gray-800 mb-1">
+                <>
+                  <h2 className="text-3xl font-bold text-gray-800">
                     {user.nickname}
                   </h2>
                   <button
                     onClick={handleEdit}
-                    className="bg-white text-gray-400 hover:text-blue-500 border border-gray-200 shadow-sm transition-all p-2 rounded-full hover:shadow-md"
+                    className="text-gray-400 hover:text-accent transition-colors p-2"
                     title="닉네임 수정"
                   >
                     ✏️
                   </button>
-                </div>
+                </>
               )}
-              <p className="text-gray-500 font-medium tracking-wide">
-                {user.username}
-              </p>
             </div>
+            <p className="text-gray-500 font-medium tracking-wide">
+              {user.username}
+            </p>
+          </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-gray-100">
-              <div className="bg-gray-50 p-4 rounded-xl">
-                <label className="text-xs text-gray-400 uppercase tracking-wider font-bold block mb-1">
-                  이메일
-                </label>
-                <p className="text-gray-700 font-medium">{user.email}</p>
-              </div>
-              <div className="bg-gray-50 p-4 rounded-xl">
-                <label className="text-xs text-gray-400 uppercase tracking-wider font-bold block mb-1">
-                  가입일
-                </label>
-                <p className="text-gray-700 font-medium">
-                  {user.createdAt
-                    ? new Date(user.createdAt).toLocaleDateString("ko-KR", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })
-                    : "-"}
-                </p>
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-6 border-t border-gray-50">
+            <div className="bg-gray-50 p-4 rounded-xl text-left">
+              <label className="text-xs text-gray-400 uppercase tracking-wider font-bold block mb-1">
+                이메일
+              </label>
+              <p className="text-gray-700 font-bold">{user.email}</p>
+            </div>
+            <div className="bg-gray-50 p-4 rounded-xl text-left">
+              <label className="text-xs text-gray-400 uppercase tracking-wider font-bold block mb-1">
+                가입일
+              </label>
+              <p className="text-gray-700 font-bold">
+                {user.createdAt
+                  ? new Date(user.createdAt).toLocaleString("ko-KR", {
+                      month: "long",
+                      day: "numeric",
+                    })
+                  : "-"}
+              </p>
             </div>
           </div>
         </div>
@@ -191,14 +184,14 @@ export default function UserPage() {
         <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-gray-800">
           <span className="text-2xl">✏️</span>
           내가 쓴 글
-          <span className="bg-blue-50 text-[rgb(37,147,255)] text-sm px-2 py-0.5 rounded-full font-bold ml-1">
+          <span className="bg-blue-50 text-accent text-sm px-2 py-0.5 rounded-full font-bold ml-1">
             {user.posts?.length || 0}
           </span>
         </h3>
 
-        <div className="grid gap-4">
+        <div className="space-y-4">
           {user.posts?.length === 0 ? (
-            <div className="glass-card p-12 text-center text-gray-500">
+            <div className="bg-white rounded-2xl p-12 text-center text-gray-500 shadow-sm border border-gray-100">
               작성한 글이 없습니다.
             </div>
           ) : (
@@ -206,11 +199,11 @@ export default function UserPage() {
               <Link
                 href={`/board/${post.id}`}
                 key={post.id}
-                className="group block glass-card p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border-l-4 border-l-transparent hover:border-l-[rgb(37,147,255)]"
+                className="group block bg-white rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-md border border-gray-100 hover:border-blue-100"
               >
                 <div className="flex justify-between items-center">
                   <div>
-                    <span className="font-semibold text-lg text-gray-800 group-hover:text-[rgb(37,147,255)] transition-colors">
+                    <span className="font-bold text-lg text-gray-800 group-hover:text-accent transition-colors">
                       {post.title}
                     </span>
                   </div>
@@ -220,6 +213,7 @@ export default function UserPage() {
                       day: "numeric",
                       hour: "2-digit",
                       minute: "2-digit",
+                      hour12: false,
                     })}
                   </span>
                 </div>

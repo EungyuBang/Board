@@ -18,6 +18,8 @@ export const metadata: Metadata = {
   description: "모던한 게시판 웹 애플리케이션",
 };
 
+import HeaderComponent from "@/components/headerComponent";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -26,9 +28,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50/50`}
       >
-        <main className="max-w-5xl mx-auto px-4 py-8">{children}</main>
+        <HeaderComponent />
+        <main className="max-w-6xl mx-auto px-4 py-8">{children}</main>
       </body>
     </html>
   );

@@ -84,51 +84,64 @@ export default function BoardDetailComponent() {
   const isAuthor = userinfo && boardinfo.authorId === userinfo.id;
 
   return (
-    <>
+    <div className="animate-fade-in">
+      {/* Back Link */}
       <div className="mb-6">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-800 transition-colors text-sm"
+          className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-800 transition-colors text-sm font-medium"
         >
           ← 목록으로 돌아가기
         </Link>
       </div>
 
-      <article>
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
+      {/* Detail Card */}
+      <article className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 mb-6">
+        <h1 className="text-3xl font-bold text-gray-800 mb-6 leading-tight">
           {boardinfo.title}
         </h1>
 
-        <div className="border-b border-gray-200 mb-8 pb-4 flex justify-between items-center text-sm text-gray-500">
-          <div className="flex items-center gap-3">
-            <span className="font-medium text-gray-700">
+        <div className="flex items-center gap-4 text-sm text-gray-500 mb-8 bg-gray-50 p-4 rounded-xl">
+          <div className="flex items-center gap-2">
+            <span className="bg-blue-100 text-accent font-bold px-2 py-1 rounded-md text-xs">
               {boardinfo.author?.nickname || "알 수 없음"}
             </span>
-            <span className="text-gray-300">|</span>
-            <span>{new Date(boardinfo.createdAt).toLocaleDateString()}</span>
           </div>
+          <span className="text-gray-300">|</span>
+          <span className="font-medium">
+            {new Date(boardinfo.createdAt).toLocaleDateString("ko-KR", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </span>
         </div>
 
-        <div className="text-gray-700 leading-relaxed mb-12 whitespace-pre-wrap min-h-[50]">
+        <div className="text-gray-700 leading-relaxed mb-12 whitespace-pre-wrap min-h-25 text-lg">
           {boardinfo.content}
         </div>
-      </article>
 
-      {isAuthor && (
-        <div className="flex gap-3 pt-6 border-t border-gray-200 justify-end">
-          <Link href={`/board/${id}/edit`}>
-            <button className="text-sm py-2 px-4 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded transition-colors">
-              ✏️ 수정하기
-            </button>
-          </Link>
-          <button
-            className="text-sm py-2 px-4 bg-red-50 hover:bg-red-100 text-red-600 rounded transition-colors"
-            onClick={handleDelete}
-          >
-            🗑️ 삭제하기
-          </button>
+        {/* Buttons */}
+        <div className="flex gap-3 justify-end pt-6 border-t border-gray-100">
+          {isAuthor ? (
+            <>
+              <Link href={`/board/${id}/edit`}>
+                <button className="flex items-center gap-2 bg-white border border-gray-200 text-gray-600 font-bold py-2 px-4 rounded-xl hover:bg-gray-50 transition-all text-sm">
+                  ✏️ 수정하기
+                </button>
+              </Link>
+              <button
+                className="flex items-center gap-2 bg-red-50 text-red-500 font-bold py-2 px-4 rounded-xl hover:bg-red-100 transition-all text-sm"
+                onClick={handleDelete}
+              >
+                🗑️ 삭제하기
+              </button>
+            </>
+          ) : (
+            <div className="h-8"></div> // Spacer to keep layout if not author
+          )}
         </div>
-      )}
-    </>
+      </article>
+    </div>
   );
 }

@@ -53,53 +53,59 @@ export default function Login() {
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center animate-fade-in">
-      <div className="glass-card p-8 w-full max-w-md">
+      <div className="bg-white rounded-2xl p-10 shadow-sm border border-gray-100 w-full max-w-md">
         <div className="text-center mb-8">
-          <h1
-            className="text-3xl font-bold"
-            style={{ color: "rgb(37, 147, 255)" }}
-          >
-            로그인
-          </h1>
-          <p className="text-gray-500 mt-2">계정에 로그인하세요</p>
+          <h1 className="text-3xl font-bold text-accent mb-2">로그인</h1>
+          <p className="text-gray-500 text-sm font-medium">
+            계정에 로그인하세요
+          </p>
         </div>
 
-        {/* 
-          4. form 태그와 input 태그들을 작성하세요. 
-          - username, password 입력 칸이 필요합니다.
-          - 로그인 버튼을 만드세요.
-        */}
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          {/* 여기에 input 2개 (username, password) 만드시면 됩니다! */}
+        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           <div>
-            <label className="block text-sm text-gray-600 mb-2">아이디</label>
+            <label className="block text-sm font-bold text-gray-700 mb-2">
+              아이디
+            </label>
             <input
               type="text"
               name="username"
               value={formdata.username}
               onChange={inputChangeHandler}
               placeholder="아이디를 입력하세요"
+              className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all font-medium bg-gray-50 focus:bg-white"
             />
           </div>
           <div>
-            <label className="block text-sm text-gray-600 mb-2">비밀번호</label>
+            <label className="block text-sm font-bold text-gray-700 mb-2">
+              비밀번호
+            </label>
             <input
               type="password"
               name="password"
               value={formdata.password}
               onChange={inputChangeHandler}
               placeholder="비밀번호를 입력하세요"
+              className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all font-medium bg-gray-50 focus:bg-white"
             />
           </div>
-          <button type="submit" className="w-full mt-4">
+          <button
+            type="submit"
+            className="btn-primary w-full py-4 text-base font-bold mt-2 hover:-translate-y-0.5 shadow-lg hover:shadow-xl transition-all duration-300"
+          >
             로그인
           </button>
-          <p className="text-center text-gray-500 text-sm mt-4">
-            계정이 없으신가요?{" "}
-            <Link href="/signup" style={{ color: "rgb(37, 147, 255)" }}>
-              회원가입
-            </Link>
-          </p>
+
+          <div className="text-center mt-4">
+            <p className="text-gray-400 text-sm">
+              계정이 없으신가요?{" "}
+              <Link
+                href="/signup"
+                className="text-accent font-bold hover:underline transition-all"
+              >
+                회원가입
+              </Link>
+            </p>
+          </div>
         </form>
       </div>
     </div>

@@ -45,59 +45,56 @@ export default function BoardListComponent() {
   };
 
   return (
-    <div className="mb-10">
-      <h2 className="text-xl font-semibold text-gray-700 mb-6 flex items-center gap-2">
-        <span
-          className="w-1 h-6 rounded-full"
-          style={{ background: "rgb(37, 147, 255)" }}
-        ></span>
-        최신 게시글
-      </h2>
+    <div className="mb-10 animate-fade-in">
+      {/* Title Section */}
+      <div className="flex items-center justify-between mb-8">
+        <h2 className="text-xl font-bold text-gray-800 flex items-center gap-3">
+          <span className="w-1.5 h-6 bg-accent rounded-full"></span>
+          최신 게시글
+        </h2>
+        <span className="bg-blue-50 text-accent text-xs font-bold px-2 py-1 rounded-full">
+          {posts.length}개
+        </span>
+      </div>
 
       {posts.length === 0 ? (
-        <div className="glass-card p-12 text-center">
-          <p className="text-gray-600 text-lg">아직 게시글이 없습니다</p>
-          <p className="text-gray-400 text-sm mt-2">
-            첫 번째 글을 작성해보세요!
+        <div className="bg-white rounded-2xl p-16 text-center shadow-sm border border-gray-100">
+          <div className="text-6xl mb-4">📭</div>
+          <p className="text-gray-800 text-lg font-bold mb-2">
+            아직 게시글이 없습니다
+          </p>
+          <p className="text-gray-400 text-sm">
+            첫 번째 글을 작성하여 커뮤니티를 시작해보세요!
           </p>
         </div>
       ) : (
         <>
-          <div className="grid gap-4 mb-6">
+          <div className="grid gap-4 mb-8">
             {posts.map((post) => (
               <Link href={`/board/${post.id}`} key={post.id}>
-                <div
-                  className="glass-card p-5 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
-                  style={{ borderColor: "transparent" }}
-                >
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2 group-hover:text-[rgb(37,147,255)] transition-colors">
-                    {post.title}
-                  </h3>
-                  {/* <p className="text-gray-500 text-sm mb-3 line-clamp-2">
-                    {post.content}
-                  </p> */}
-                  <div className="flex items-center gap-2 text-xs text-gray-500">
-                    <span
-                      className="px-2 py-1 rounded-full"
-                      style={{
-                        background: "rgba(37, 147, 255, 0.1)",
-                        color: "rgb(37, 147, 255)",
-                      }}
-                    >
+                <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-pointer">
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="text-lg font-bold text-gray-800 group-hover:text-accent transition-colors mb-1">
+                      {post.title}
+                    </h3>
+                    <div className="flex items-center gap-1 text-gray-400 text-xs">
+                      <span>💬 {post._count?.comments || 0}</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3 text-sm text-gray-500 mt-4">
+                    <span className="bg-blue-50 text-accent px-2 py-1 rounded-md text-xs font-bold">
                       {post.author?.nickname || "알 수 없음"}
                     </span>
                     <span className="text-gray-300">|</span>
-                    <span>
-                      {new Date(post.createdAt).toLocaleDateString("ko-KR", {
-                        month: "numeric",
+                    <span className="text-xs">
+                      {new Date(post.createdAt).toLocaleString("ko-KR", {
+                        month: "long",
                         day: "numeric",
                         hour: "2-digit",
                         minute: "2-digit",
                         hour12: false,
                       })}
-                    </span>
-                    <span className="text-gray-400">
-                      💬 {post._count?.comments || 0}
                     </span>
                   </div>
                 </div>
@@ -105,31 +102,21 @@ export default function BoardListComponent() {
             ))}
           </div>
 
-          <div className="flex justify-center items-center gap-4">
+          <div className="flex justify-center items-center gap-2">
             <button
               onClick={handlePrevPage}
               disabled={page === 1}
-              className="px-3 py-1 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
-              style={{
-                background: "transparent",
-                color: "#6b7280",
-                boxShadow: "none",
-              }}
+              className="flex items-center gap-1 px-4 py-2 rounded-lg hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed text-gray-500 font-medium transition-colors"
             >
               ← 이전
             </button>
-            <span className="text-sm text-gray-600">
-              {page} / {totalPages}
+            <span className="text-sm font-bold text-gray-600 bg-gray-100 px-3 py-1 rounded-lg">
+              {page}
             </span>
             <button
               onClick={handleNextPage}
               disabled={page === totalPages}
-              className="px-3 py-1 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
-              style={{
-                background: "transparent",
-                color: "#6b7280",
-                boxShadow: "none",
-              }}
+              className="flex items-center gap-1 px-4 py-2 rounded-lg hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed text-gray-500 font-medium transition-colors"
             >
               다음 →
             </button>
