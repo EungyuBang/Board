@@ -9,8 +9,8 @@ export default function BoardDetailComponent() {
   const params = useParams();
   const id = params.id;
 
-  const [boardinfo, setBoardInfo] = useState<any>(null);
-  const [userinfo, setUserInfo] = useState<any>(null);
+  const [boardinfo, setBoardInfo] = useState(null);
+  const [userinfo, setUserInfo] = useState(null);
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");

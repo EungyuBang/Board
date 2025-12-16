@@ -51,13 +51,14 @@ export default function MainPage() {
       {/* 헤더 영역 */}
       <div className="glass-card p-6 mb-8">
         <div className="flex items-center justify-between">
-          <h1
-            className="text-3xl font-bold"
-            style={{ color: "rgb(37, 147, 255)" }}
-          >
-            📋 게시판
-          </h1>
-
+          <Link href="/">
+            <h1
+              className="text-3xl font-bold"
+              style={{ color: "rgb(37, 147, 255)" }}
+            >
+              게시판
+            </h1>
+          </Link>
           {isLoggedIn ? (
             // === 로그인 중일 때 보여줄 화면 ===
             <div className="flex items-center gap-4">

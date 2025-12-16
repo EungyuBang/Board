@@ -43,10 +43,6 @@ export class CommentService {
     });
   }
 
-  findOne(id: number) {
-    return this.prisma.comment.findUnique({ where: { id } });
-  }
-
   // 댓글 수정 (본인 확인 필요)
   async update(id: number, userId: number, updateCommentDto: UpdateCommentDto) {
     const comment = await this.prisma.comment.findUnique({ where: { id } });

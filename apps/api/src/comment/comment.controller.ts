@@ -18,6 +18,8 @@ import { AuthGuard } from "@nestjs/passport";
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
 
+  // 비어있으면 comment/ 로 들어온다
+  // 댓글 생성
   @UseGuards(AuthGuard("jwt"))
   @Post()
   create(@Req() req, @Body() createCommentDto: CreateCommentDto) {
@@ -27,15 +29,11 @@ export class CommentController {
   // 특정 게시글의 댓글 목록 조회
   // GET /comment/post/:postId
   @Get("post/:postId")
-  findAll(@Param("postId") postId: string) {
-    return this.commentService.findAll(+postId);
+  findAll(@Param("postId") postId: number) {
+    return this.commentService.findAll(postId);
   }
 
-  @Get(":id")
-  findOne(@Param("id") id: string) {
-    return this.commentService.findOne(+id);
-  }
-
+  // 댓글 수정
   @UseGuards(AuthGuard("jwt"))
   @Patch(":id")
   update(
@@ -46,6 +44,7 @@ export class CommentController {
     return this.commentService.update(+id, req.user.id, updateCommentDto);
   }
 
+  // 댓글 삭제
   @UseGuards(AuthGuard("jwt"))
   @Delete(":id")
   remove(@Param("id") id: string, @Req() req) {
