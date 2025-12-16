@@ -85,7 +85,11 @@ export class PostService {
   }
 
   // 게시글 수정
-  update(id: number, updatePostDto: UpdatePostDto) {
+  async update(id: number, userId: number, updatePostDto: UpdatePostDto) {
+    const post = await this.prisma.post.findUnique({ where: { id } });
+    if (!post) throw new Error("게시글을 찾을 수 없습니다.");
+    if (post.authorId !== userId) throw new Error("수정 권한이 없습니다.");
+
     return this.prisma.post.update({
       where: { id },
       data: updatePostDto,
@@ -93,7 +97,11 @@ export class PostService {
   }
 
   // 게시글 삭제
-  remove(id: number) {
+  async remove(id: number, userId: number) {
+    const post = await this.prisma.post.findUnique({ where: { id } });
+    if (!post) throw new Error("게시글을 찾을 수 없습니다.");
+    if (post.authorId !== userId) throw new Error("삭제 권한이 없습니다.");
+
     return this.prisma.post.delete({
       where: { id },
     });

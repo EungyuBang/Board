@@ -38,13 +38,19 @@ export class PostController {
     return this.postService.findOne(+id);
   }
 
+  @UseGuards(AuthGuard("jwt"))
   @Patch(":id")
-  update(@Param("id") id: string, @Body() updatePostDto: UpdatePostDto) {
-    return this.postService.update(+id, updatePostDto);
+  update(
+    @Param("id") id: string,
+    @Req() req,
+    @Body() updatePostDto: UpdatePostDto,
+  ) {
+    return this.postService.update(+id, +req.user.id, updatePostDto);
   }
 
+  @UseGuards(AuthGuard("jwt"))
   @Delete(":id")
-  remove(@Param("id") id: string) {
-    return this.postService.remove(+id);
+  remove(@Param("id") id: string, @Req() req) {
+    return this.postService.remove(+id, +req.user.id);
   }
 }
