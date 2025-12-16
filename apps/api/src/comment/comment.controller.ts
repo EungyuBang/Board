@@ -29,8 +29,8 @@ export class CommentController {
   // 특정 게시글의 댓글 목록 조회
   // GET /comment/post/:postId
   @Get("post/:postId")
-  findAll(@Param("postId") postId: number) {
-    return this.commentService.findAll(postId);
+  findAll(@Param("postId") postId: string) {
+    return this.commentService.findAll(+postId);
   }
 
   // 댓글 수정

@@ -32,7 +32,6 @@ export default function CommentSection() {
           console.error(error);
         }
       };
-      // eslint-disable-next-line
       fetchUser();
     }
   }, []);

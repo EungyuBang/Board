@@ -1,5 +1,8 @@
 "use client";
 
+// 게시글 리스트 컴퍼넌트
+// app/page.tsx에서 사용한다 (mainPage 에서 렌더링 되어야 하니까)
+
 import { useEffect, useState } from "react";
 import Link from "next/link";
 

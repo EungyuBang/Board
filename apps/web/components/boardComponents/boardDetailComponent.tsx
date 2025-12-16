@@ -1,5 +1,8 @@
 "use client";
 
+// 게시글 상세 컴퍼넌트
+// board/[id]/page.tsx에서 사용한다
+
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
