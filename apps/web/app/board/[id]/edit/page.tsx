@@ -49,53 +49,55 @@ export default function EditBoard() {
     }
   };
   return (
-    <div className="animate-fade-in max-w-3xl mx-auto">
-      {/* Back Link */}
-      <div className="mb-6">
-        <Link
-          href={`/board/${id}`}
-          className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-800 transition-colors text-sm font-medium"
-        >
-          ← 게시글로 돌아가기
-        </Link>
-      </div>
+    <div className="animate-fade-in max-w-6xl mx-auto px-4 py-8">
+      <div className="max-w-3xl mx-auto">
+        {/* Back Link */}
+        <div className="mb-6">
+          <Link
+            href={`/board/${id}`}
+            className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-800 transition-colors text-sm font-medium"
+          >
+            ← 게시글로 돌아가기
+          </Link>
+        </div>
 
-      <div className="bg-white rounded-2xl p-10 shadow-sm border border-gray-100">
-        <h1 className="text-2xl font-bold mb-8 text-gray-800">게시글 수정</h1>
+        <div className="bg-white rounded-2xl p-10 shadow-sm border border-gray-100">
+          <h1 className="text-2xl font-bold mb-8 text-gray-800">게시글 수정</h1>
 
-        <div className="space-y-6">
-          <div>
-            <label className="block text-sm font-bold text-gray-700 mb-2">
-              제목
-            </label>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => serTitle(e.target.value)}
-              className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all font-medium"
-              placeholder="제목을 입력하세요"
-            />
-          </div>
+          <div className="space-y-6">
+            <div>
+              <label className="block text-sm font-bold text-gray-700 mb-2">
+                제목
+              </label>
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => serTitle(e.target.value)}
+                className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all font-medium"
+                placeholder="제목을 입력하세요"
+              />
+            </div>
 
-          <div>
-            <label className="block text-sm font-bold text-gray-700 mb-2">
-              내용
-            </label>
-            <textarea
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              className="w-full p-4 border border-gray-200 rounded-xl h-80 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all resize-none leading-relaxed"
-              placeholder="내용을 입력하세요"
-            ></textarea>
-          </div>
+            <div>
+              <label className="block text-sm font-bold text-gray-700 mb-2">
+                내용
+              </label>
+              <textarea
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                className="w-full p-4 border border-gray-200 rounded-xl h-80 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all resize-none leading-relaxed"
+                placeholder="내용을 입력하세요"
+              ></textarea>
+            </div>
 
-          <div className="flex justify-end pt-8 mt-4">
-            <button
-              onClick={handleSubmit}
-              className="btn-primary py-3 px-8 text-base shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
-            >
-              수정 완료 ✨
-            </button>
+            <div className="flex justify-end pt-8 mt-4">
+              <button
+                onClick={handleSubmit}
+                className="btn-primary py-3 px-8 text-base shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
+              >
+                수정 완료 ✨
+              </button>
+            </div>
           </div>
         </div>
       </div>
