@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import BoardListComponent from "@/components/boardComponents/boardListComponent";
+import { User } from "@/types";
 
 export default function MainPage() {
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState<any>({});
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     // 1. localStorage에서 토큰("accessToken")이 있는지 확인하고 state를 업데이트하세요.
@@ -41,7 +42,7 @@ export default function MainPage() {
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
     setIsLoggedIn(false);
-    setUser({});
+    setUser(null);
     alert("로그아웃 되었습니다");
     router.push("/");
   };

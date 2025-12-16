@@ -2,10 +2,11 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useParams } from "next/navigation";
+import { Comment, User } from "../types";
 
 export default function CommentSection() {
   const { id } = useParams(); // 게시글 ID
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState<Comment[]>([]);
   const [content, setContent] = useState("");
 
   // 수정 관련 State
@@ -13,7 +14,7 @@ export default function CommentSection() {
   const [editContent, setEditContent] = useState("");
 
   // 현재 로그인한 유저 정보
-  const [currentUser, setCurrentUser] = useState<{ id: number } | null>(null);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
 
   // 현재 유저 정보 가져오기
   useEffect(() => {
@@ -167,7 +168,7 @@ export default function CommentSection() {
 
       {/* 댓글 목록 */}
       <div className="space-y-4">
-        {comments.map((comment: any) => (
+        {comments.map((comment) => (
           <div key={comment.id} className="bg-gray-50 p-4 rounded-xl">
             <div className="flex justify-between items-start mb-2">
               <span className="font-bold text-gray-700">

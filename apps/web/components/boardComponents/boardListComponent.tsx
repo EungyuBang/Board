@@ -5,9 +5,10 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Post } from "../../types";
 
 export default function BoardListComponent() {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<Post[]>([]);
   const [page, setPage] = useState(1);
   const [limit] = useState(10);
   const [totalPages, setTotalPages] = useState(1);
@@ -63,7 +64,7 @@ export default function BoardListComponent() {
       ) : (
         <>
           <div className="grid gap-4 mb-6">
-            {posts.map((post: any) => (
+            {posts.map((post) => (
               <Link href={`/board/${post.id}`} key={post.id}>
                 <div
                   className="glass-card p-5 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer group"

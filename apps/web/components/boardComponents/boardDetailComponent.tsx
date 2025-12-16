@@ -6,14 +6,15 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import { Post, User } from "../../types";
 
 export default function BoardDetailComponent() {
   const router = useRouter();
   const params = useParams();
   const id = params.id;
 
-  const [boardinfo, setBoardInfo] = useState(null);
-  const [userinfo, setUserInfo] = useState(null);
+  const [boardinfo, setBoardInfo] = useState<Post | null>(null);
+  const [userinfo, setUserInfo] = useState<User | null>(null);
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
