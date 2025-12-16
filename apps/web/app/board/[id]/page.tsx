@@ -1,7 +1,7 @@
 "use client";
 
 import CommentSection from "@/components/commentComponent";
-import BoardDetailComponent from "@/components/boardDetailComponent";
+import BoardDetailComponent from "@/components/boardComponents/boardDetailComponent";
 
 export default function BoardDetailPage() {
   return (
