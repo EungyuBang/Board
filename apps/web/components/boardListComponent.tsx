@@ -5,7 +5,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Post } from "../../types";
+import { Post } from "../types";
 
 export default function BoardListComponent() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -73,9 +73,9 @@ export default function BoardListComponent() {
                   <h3 className="text-lg font-semibold text-gray-800 mb-2 group-hover:text-[rgb(37,147,255)] transition-colors">
                     {post.title}
                   </h3>
-                  <p className="text-gray-500 text-sm mb-3 line-clamp-2">
+                  {/* <p className="text-gray-500 text-sm mb-3 line-clamp-2">
                     {post.content}
-                  </p>
+                  </p> */}
                   <div className="flex items-center gap-2 text-xs text-gray-500">
                     <span
                       className="px-2 py-1 rounded-full"

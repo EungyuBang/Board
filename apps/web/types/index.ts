@@ -2,6 +2,14 @@ export interface User {
   id: number;
   nickname?: string;
   email?: string;
+  createdAt?: string;
+  username?: string;
+  posts?: {
+    id: number;
+    title: string;
+    createdAt: string;
+    updatedAt?: string;
+  }[];
 }
 
 export interface Comment {

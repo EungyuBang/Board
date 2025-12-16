@@ -6,7 +6,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { Post, User } from "../../types";
+import { Post, User } from "../types";
 
 export default function BoardDetailComponent() {
   const router = useRouter();

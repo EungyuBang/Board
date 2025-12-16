@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useParams } from "next/navigation";
 import { Comment, User } from "../types";
 
-export default function CommentSection() {
+export default function CommentComponent() {
   const { id } = useParams(); // 게시글 ID
   const [comments, setComments] = useState<Comment[]>([]);
   const [content, setContent] = useState("");
