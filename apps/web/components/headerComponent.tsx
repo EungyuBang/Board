@@ -14,7 +14,7 @@ export default function HeaderComponent() {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    // 1. localStorage에서 토큰("accessToken")이 있는지 확인하고 state를 업데이트하세요.
+    // 1. localStorage에서 토큰("accessToken")이 있는지 확인하고 state를 업데이트.
     // (있으면 true, 없으면 false)
     const accessToken = localStorage.getItem("accessToken");
     if (accessToken) {

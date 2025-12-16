@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { Comment, User } from "../types";
 
 export default function CommentComponent() {
-  const { id } = useParams(); // 게시글 ID
+  const { postId } = useParams(); // 게시글 ID
   const [comments, setComments] = useState<Comment[]>([]);
   const [content, setContent] = useState("");
 
@@ -40,7 +40,7 @@ export default function CommentComponent() {
   // 댓글 목록 불러오기
   const fetchComments = useCallback(async () => {
     try {
-      const res = await fetch(`http://localhost:4000/comment/post/${id}`);
+      const res = await fetch(`http://localhost:4000/comment/post/${postId}`);
       if (res.ok) {
         const data = await res.json();
         setComments(data);
@@ -48,7 +48,7 @@ export default function CommentComponent() {
     } catch (error) {
       console.error(error);
     }
-  }, [id]);
+  }, [postId]);
 
   useEffect(() => {
     // eslint-disable-next-line
@@ -71,7 +71,7 @@ export default function CommentComponent() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
-        body: JSON.stringify({ content, postId: Number(id) }),
+        body: JSON.stringify({ content, postId: Number(postId) }),
       });
 
       if (res.ok) {

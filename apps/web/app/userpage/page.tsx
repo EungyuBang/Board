@@ -11,11 +11,14 @@ export default function UserPage() {
   const [editNickname, setEditNickname] = useState("");
 
   const handleEdit = () => {
+    // 화면을 바꾸는 Trigger -> isEditing을 true로 변경
     setIsEditing(true);
+    // 입력창에 원래 닉네임 적어놓는다
     setEditNickname(user?.nickname || "");
   };
 
   const handleCancelEdit = () => {
+    // 화면을 바꾸는 Trigger -> isEditing을 false로 변경
     setIsEditing(false);
     setEditNickname("");
   };
@@ -54,14 +57,14 @@ export default function UserPage() {
 
       const fetchUser = async () => {
         try {
-          const response = await fetch("http://localhost:4000/users/me", {
+          const res = await fetch("http://localhost:4000/users/me", {
             method: "GET",
             headers: { Authorization: `Bearer ${accessToken}` },
           });
-          if (!response.ok) {
+          if (!res.ok) {
             throw new Error("User 정보를 가져올 수 없습니다.");
           }
-          const data = await response.json();
+          const data = await res.json();
           setUser(data);
         } catch (e) {
           console.error("User 정보를 가져오는데 실패했습니다:", e);
@@ -113,8 +116,10 @@ export default function UserPage() {
           <div className="flex-1 space-y-4 w-full text-center md:text-left">
             <div>
               <div className="flex items-center justify-center md:justify-between w-full group mb-1">
+                {/* 여기서 isEditing의 상태에 따라 다른 화면 렌더링 true: 수정 중, false: 수정 전 */}
                 {isEditing ? (
                   <div className="flex items-center gap-2">
+                    {/* isEditing이 true면 이 부분이 보여짐 */}
                     <input
                       type="text"
                       value={editNickname}
@@ -124,12 +129,14 @@ export default function UserPage() {
                     />
                     <div className="flex gap-2">
                       <button
+                        // 저장 버튼 누르면 handleSaveEdit 함수 실행
                         onClick={handleSaveEdit}
                         className="text-xs bg-accent text-white px-3 py-1.5 rounded-lg hover:bg-accent-hover font-bold transition-colors"
                       >
                         저장
                       </button>
                       <button
+                        // 취소 버튼 누르면 handleCancelEdit 함수 실행
                         onClick={handleCancelEdit}
                         className="text-xs bg-gray-100 text-gray-600 px-3 py-1.5 rounded-lg hover:bg-gray-200 font-bold transition-colors"
                       >
@@ -138,6 +145,7 @@ export default function UserPage() {
                     </div>
                   </div>
                 ) : (
+                  // isEditing이 false면 이 부분이 보여짐
                   <>
                     <h2 className="text-3xl font-bold text-gray-800">
                       {user.nickname}

@@ -16,7 +16,7 @@ export default function Signup() {
     email: "",
   });
 
-  // 2. input 값이 바뀔 때마다 state를 업데이트하는 함수를 만드세요.
+  // input 값이 바뀔 때마다 state를 업데이트하는 함수.
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
     setFromData((prev) => ({
@@ -27,7 +27,7 @@ export default function Signup() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // 3. 백엔드 API ("http://localhost:4000/auth/register")에 POST 요청을 보내세요.
+    // 백엔드 API ("http://localhost:4000/auth/register")에 POST 요청.
     // - 성공하면: 로그인 페이지("/login")로 이동
     // - 실패하면: 에러 메시지(alert) 띄우기
     try {

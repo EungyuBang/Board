@@ -66,7 +66,6 @@ export class AuthService {
 
     // 3. 토큰 발급
     const accessToken = this.jwtService.sign({
-      nickname: user.nickname,
       sub: user.id,
     });
 

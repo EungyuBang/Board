@@ -5,7 +5,8 @@ import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function EditBoard() {
-  const { id } = useParams();
+  const params = useParams();
+  const postId = params.id;
   const router = useRouter();
 
   const [title, serTitle] = useState("");
@@ -14,13 +15,13 @@ export default function EditBoard() {
   // 기존 데이터 가져오기
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(`http://localhost:4000/post/${id}`);
+      const res = await fetch(`http://localhost:4000/post/${postId}`);
       const data = await res.json();
       serTitle(data.title);
       setContent(data.content);
     };
     fetchData();
-  }, [id]);
+  }, [postId]);
 
   const handleSubmit = async () => {
     const accessToken = localStorage.getItem("accessToken");
@@ -29,7 +30,7 @@ export default function EditBoard() {
       return;
     }
     try {
-      const res = await fetch(`http://localhost:4000/post/${id}`, {
+      const res = await fetch(`http://localhost:4000/post/${postId}`, {
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -39,7 +40,7 @@ export default function EditBoard() {
       });
       if (res.ok) {
         alert("게시글이 수정되었습니다.");
-        router.push(`http://localhost:3000/board/${id}`);
+        router.push(`http://localhost:3000/board/${postId}`);
       } else {
         alert("수정에 실패했습니다.");
       }
@@ -54,7 +55,7 @@ export default function EditBoard() {
         {/* Back Link */}
         <div className="mb-6">
           <Link
-            href={`/board/${id}`}
+            href={`/board/${postId}`}
             className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-800 transition-colors text-sm font-medium"
           >
             ← 게시글로 돌아가기

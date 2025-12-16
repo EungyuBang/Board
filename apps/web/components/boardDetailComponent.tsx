@@ -11,7 +11,7 @@ import { Post, User } from "../types";
 export default function BoardDetailComponent() {
   const router = useRouter();
   const params = useParams();
-  const id = params.id;
+  const postId = params.id;
 
   const [boardinfo, setBoardInfo] = useState<Post | null>(null);
   const [userinfo, setUserInfo] = useState<User | null>(null);
@@ -21,7 +21,9 @@ export default function BoardDetailComponent() {
 
     const fetchData = async () => {
       try {
-        const boardRes = await fetch(`http://localhost:4000/post/${id}`);
+        // 게시글 정보 가져오기
+        // 이건 로그인 안 해도 보게 할거니까 토큰을 안 보냄
+        const boardRes = await fetch(`http://localhost:4000/post/${postId}`);
         if (!boardRes.ok) throw new Error("게시글을 불러올 수 없습니다.");
         const boardData = await boardRes.json();
         setBoardInfo(boardData);
@@ -41,7 +43,7 @@ export default function BoardDetailComponent() {
     };
 
     fetchData();
-  }, [id]);
+  }, [postId]);
 
   const handleDelete = async () => {
     if (!confirm("정말 이 게시글을 삭제하시겠습니까?")) return;
@@ -53,7 +55,7 @@ export default function BoardDetailComponent() {
     }
 
     try {
-      const res = await fetch(`http://localhost:4000/post/${id}`, {
+      const res = await fetch(`http://localhost:4000/post/${postId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${accessToken}` },
       });
@@ -125,7 +127,7 @@ export default function BoardDetailComponent() {
         <div className="flex gap-3 justify-end pt-6 border-t border-gray-100">
           {isAuthor ? (
             <>
-              <Link href={`/board/${id}/edit`}>
+              <Link href={`/board/${postId}/edit`}>
                 <button className="flex items-center gap-2 bg-white border border-gray-200 text-gray-600 font-bold py-2 px-4 rounded-xl hover:bg-gray-50 transition-all text-sm">
                   ✏️ 수정하기
                 </button>
