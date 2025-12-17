@@ -17,8 +17,9 @@ export default function BoardListComponent() {
     const accessToken = localStorage.getItem("accessToken");
     const fetchPosts = async () => {
       try {
+        const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
         const response = await fetch(
-          `http://localhost:4000/post?page=${page}&limit=${limit}`,
+          `${API_URL}/post?page=${page}&limit=${limit}`,
           {
             method: "GET",
             headers: { Authorization: `Bearer ${accessToken}` },

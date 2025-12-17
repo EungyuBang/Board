@@ -27,7 +27,8 @@ export default function UserPage() {
     if (!editNickname.trim()) return;
     const accessToken = localStorage.getItem("accessToken");
     try {
-      const res = await fetch("http://localhost:4000/users/me", {
+      const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const res = await fetch(`${API_URL}/users/me`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -57,7 +58,8 @@ export default function UserPage() {
 
       const fetchUser = async () => {
         try {
-          const res = await fetch("http://localhost:4000/users/me", {
+          const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+          const res = await fetch(`${API_URL}/users/me`, {
             method: "GET",
             headers: { Authorization: `Bearer ${accessToken}` },
           });
@@ -242,7 +244,8 @@ export default function UserPage() {
               ) {
                 const accessToken = localStorage.getItem("accessToken");
                 try {
-                  const res = await fetch("http://localhost:4000/users/me", {
+                  const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+                  const res = await fetch(`${API_URL}/users/me`, {
                     method: "DELETE",
                     headers: { Authorization: `Bearer ${accessToken}` },
                   });

@@ -31,7 +31,8 @@ export default function Signup() {
     // - 성공하면: 로그인 페이지("/login")로 이동
     // - 실패하면: 에러 메시지(alert) 띄우기
     try {
-      const response = await fetch("http://localhost:4000/auth/register", {
+      const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const response = await fetch(`${API_URL}/auth/register`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

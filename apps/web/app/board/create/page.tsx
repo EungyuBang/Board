@@ -24,7 +24,8 @@ export default function BoardCreatePage() {
     }
 
     try {
-      const res = await fetch("http://localhost:4000/post", {
+      const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const res = await fetch(`${API_URL}/post`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

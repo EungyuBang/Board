@@ -26,7 +26,8 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:4000/auth/login", {
+      const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const response = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

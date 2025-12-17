@@ -21,9 +21,10 @@ export default function CommentComponent() {
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
     if (accessToken) {
+      const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
       const fetchUser = async () => {
         try {
-          const res = await fetch("http://localhost:4000/users/me", {
+          const res = await fetch(`${API_URL}/users/me`, {
             headers: { Authorization: `Bearer ${accessToken}` },
           });
           if (res.ok) {
@@ -41,7 +42,8 @@ export default function CommentComponent() {
   // 댓글 목록 불러오기
   const fetchComments = useCallback(async () => {
     try {
-      const res = await fetch(`http://localhost:4000/comment/post/${postId}`);
+      const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const res = await fetch(`${API_URL}/comment/post/${postId}`);
       if (res.ok) {
         const data = await res.json();
         setComments(data);
@@ -66,7 +68,8 @@ export default function CommentComponent() {
     if (!content) return;
 
     try {
-      const res = await fetch("http://localhost:4000/comment", {
+      const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const res = await fetch(`${API_URL}/comment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -92,7 +95,8 @@ export default function CommentComponent() {
     const accessToken = localStorage.getItem("accessToken");
 
     try {
-      const res = await fetch(`http://localhost:4000/comment/${commentId}`, {
+      const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const res = await fetch(`${API_URL}/comment/${commentId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${accessToken}` },
       });
@@ -125,7 +129,8 @@ export default function CommentComponent() {
     const accessToken = localStorage.getItem("accessToken");
 
     try {
-      const res = await fetch(`http://localhost:4000/comment/${commentId}`, {
+      const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const res = await fetch(`${API_URL}/comment/${commentId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

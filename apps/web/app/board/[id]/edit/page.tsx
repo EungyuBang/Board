@@ -14,8 +14,9 @@ export default function EditBoard() {
 
   // 기존 데이터 가져오기
   useEffect(() => {
+    const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
     const fetchData = async () => {
-      const res = await fetch(`http://localhost:4000/post/${postId}`);
+      const res = await fetch(`${API_URL}/post/${postId}`);
       const data = await res.json();
       serTitle(data.title);
       setContent(data.content);
@@ -30,7 +31,8 @@ export default function EditBoard() {
       return;
     }
     try {
-      const res = await fetch(`http://localhost:4000/post/${postId}`, {
+      const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const res = await fetch(`${API_URL}/post/${postId}`, {
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -40,7 +42,7 @@ export default function EditBoard() {
       });
       if (res.ok) {
         alert("게시글이 수정되었습니다.");
-        router.push(`http://localhost:3000/board/${postId}`);
+        router.push(`${API_URL}/board/${postId}`);
       } else {
         alert("수정에 실패했습니다.");
       }

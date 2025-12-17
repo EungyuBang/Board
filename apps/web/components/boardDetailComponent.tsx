@@ -23,13 +23,14 @@ export default function BoardDetailComponent() {
       try {
         // 게시글 정보 가져오기
         // 이건 로그인 안 해도 보게 할거니까 토큰을 안 보냄
-        const boardRes = await fetch(`http://localhost:4000/post/${postId}`);
+        const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+        const boardRes = await fetch(`${API_URL}/post/${postId}`);
         if (!boardRes.ok) throw new Error("게시글을 불러올 수 없습니다.");
         const boardData = await boardRes.json();
         setBoardInfo(boardData);
 
         if (accessToken) {
-          const userRes = await fetch(`http://localhost:4000/users/me`, {
+          const userRes = await fetch(`${API_URL}/users/me`, {
             headers: { Authorization: `Bearer ${accessToken}` },
           });
           if (userRes.ok) {
@@ -55,7 +56,8 @@ export default function BoardDetailComponent() {
     }
 
     try {
-      const res = await fetch(`http://localhost:4000/post/${postId}`, {
+      const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const res = await fetch(`${API_URL}/post/${postId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${accessToken}` },
       });

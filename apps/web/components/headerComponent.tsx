@@ -23,7 +23,8 @@ export default function HeaderComponent() {
 
       const fetchUser = async () => {
         try {
-          const response = await fetch("http://localhost:4000/users/me", {
+          const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+          const response = await fetch(`${API_URL}/users/me`, {
             method: "GET",
             headers: { Authorization: `Bearer ${accessToken}` },
           });
