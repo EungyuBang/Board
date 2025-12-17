@@ -24,7 +24,7 @@ export class AuthService {
     });
 
     if (existingUser) {
-      throw new ConflictException("이미 존재하는 username입니다.");
+      throw new ConflictException("이미 존재하는 ID입니다.");
     }
 
     // 2. 비밀번호 암호화

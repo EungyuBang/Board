@@ -41,7 +41,10 @@ export default function Signup() {
       });
 
       if (!response.ok) {
-        throw new Error("회원가입에 실패했습니다.");
+        // server에서 json type으로 넘어온걸 받기 위해 await response.json()을 사용
+        // json 을 object로 변환
+        const errorData = await response.json();
+        throw new Error(errorData.message || "회원 가입에 실패하였습니다");
       }
       alert("회원가입이 완료되었습니다.");
       router.push("/login");
