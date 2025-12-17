@@ -51,7 +51,7 @@ export default function HeaderComponent() {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-100 shadow-sm/50">
-      {/* 헤더 영역 - Full Width Navbar styling */}
+      {/* 헤더 */}
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/">
           <div className="flex items-center gap-2">
@@ -63,7 +63,7 @@ export default function HeaderComponent() {
         </Link>
 
         {isLoggedIn ? (
-          // === 로그인 중일 때 보여줄 화면 ===
+          // 로그인 중일 때
           <div className="flex items-center gap-4">
             <span className="text-gray-600 font-medium">
               <Link
@@ -87,7 +87,7 @@ export default function HeaderComponent() {
             </button>
           </div>
         ) : (
-          // === 로그인 안 했을 때 보여줄 화면 ===
+          // 로그인 안 했을 때
           <div className="flex items-center gap-3">
             <Link href="/login">
               <button className="text-gray-600 px-4 py-1.5 rounded-xl text-sm font-bold hover:bg-gray-50 transition-all">

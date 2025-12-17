@@ -111,10 +111,11 @@ export default function BoardDetailComponent() {
           </div>
           <span className="text-gray-300">|</span>
           <span className="font-medium">
-            {new Date(boardinfo.createdAt).toLocaleDateString("ko-KR", {
-              year: "numeric",
+            {new Date(boardinfo.createdAt).toLocaleString("ko-KR", {
               month: "long",
               day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
             })}
           </span>
         </div>
