@@ -175,7 +175,10 @@ export default function CommentComponent() {
       {/* 댓글 목록 */}
       <div className="space-y-4">
         {comments.map((comment) => (
-          <div key={comment.id} className="bg-gray-50 p-4 rounded-xl">
+          <div
+            key={comment.id}
+            className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow"
+          >
             <div className="flex justify-between items-start mb-2">
               <span className="font-bold text-gray-700">
                 {comment.author?.nickname || "익명"}
