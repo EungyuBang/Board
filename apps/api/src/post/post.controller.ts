@@ -28,7 +28,7 @@ export class PostController {
   @Get()
   findAll(
     @Query("page") page: string = "1",
-    @Query("limit") limit: string = "10",
+    @Query("limit") limit: string = "5",
   ) {
     return this.postService.findAll(+page, +limit);
   }

@@ -10,7 +10,7 @@ import { Post } from "../types";
 export default function BoardListComponent() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [page, setPage] = useState(1);
-  const [limit] = useState(10);
+  const [limit] = useState(5);
   const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
@@ -73,7 +73,7 @@ export default function BoardListComponent() {
           <div className="grid gap-4 mb-8">
             {posts.map((post) => (
               <Link href={`/board/${post.id}`} key={post.id}>
-                <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-pointer">
+                <div className="bg-white rounded-2xl p-6 shadow-md border-2 border-gray-300 hover:shadow-lg hover:-translate-y-1 hover:border-blue-400 transition-all duration-300 group cursor-pointer">
                   <div className="flex justify-between items-start mb-2">
                     <h3 className="text-lg font-bold text-gray-800 group-hover:text-accent transition-colors mb-1">
                       {post.title}
