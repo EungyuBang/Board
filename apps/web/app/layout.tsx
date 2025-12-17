@@ -14,8 +14,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "게시판 | Board",
+  title: "게시판",
   description: "모던한 게시판 웹 애플리케이션",
+  icons: {
+    icon: `data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>`,
+  },
 };
 
 export default function RootLayout({
