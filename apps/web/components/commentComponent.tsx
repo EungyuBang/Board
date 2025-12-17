@@ -5,7 +5,8 @@ import { useParams } from "next/navigation";
 import { Comment, User } from "../types";
 
 export default function CommentComponent() {
-  const { postId } = useParams(); // 게시글 ID
+  const params = useParams();
+  const postId = params.id; // 게시글 ID
   const [comments, setComments] = useState<Comment[]>([]);
   const [content, setContent] = useState("");
 
