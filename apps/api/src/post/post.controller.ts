@@ -45,6 +45,7 @@ export class PostController {
     @Req() req,
     @Body() updatePostDto: UpdatePostDto,
   ) {
+    // + -> number로 변환
     return this.postService.update(+id, +req.user.id, updatePostDto);
   }
 
