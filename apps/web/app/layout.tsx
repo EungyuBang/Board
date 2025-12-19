@@ -14,6 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  // 메타데이터
+  // title, description, icons 등
   title: "게시판",
   description: "모던한 게시판 웹 애플리케이션",
   icons: {
